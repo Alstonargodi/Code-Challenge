@@ -1,6 +1,6 @@
 import java.util.*
 
-object Solution {
+object test {
     @JvmStatic
     fun main(args: Array<String>) {
         val scan = Scanner(System.`in`)
