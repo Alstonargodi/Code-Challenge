@@ -1,4 +1,4 @@
-package sorting
+package interviewpreperation.sorting
 
 import kotlin.collections.*
 import kotlin.io.*

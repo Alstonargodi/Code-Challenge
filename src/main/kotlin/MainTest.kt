@@ -1,47 +1,25 @@
-import java.util.*
 
-fun sockMerchant(n: Int, ar: List<Int>): Int {
+fun twoStrings(s1: String, s2: String): String {
     // Write your code here
-    Collections.sort(ar)
-    var count = 0
-    var j = 0
-    while (j < ar.size - 1) {
-        if (ar[j] === ar[j + 1]) {
-            count++
-            j++
+    val wordHas : MutableSet<Char> = s1.toHashSet()
+    for (a in s2){
+        if (wordHas.contains(a)){
+            return "YES"
         }
-        j++
     }
-    return count
-}
-
-
-fun sockMerchant(n: Int, ar: Array<Int>): Int {
-    var listData = arrayListOf<Int>()
-    var result = 1
-    var a = 0
-    ar.forEach {
-        listData.add(it)
-    }
-
-    listData.sort()
-    while (a < listData.size - 1){
-        if (ar[a] === ar[a+1]){
-            result++
-            a++
-        }
-        a++
-    }
-
-    return result
+    return "NO"
 }
 
 fun main(args: Array<String>) {
-    val n = readLine()!!.trim().toInt()
+    val q = readLine()!!.trim().toInt()
 
-    val ar = readLine()!!.trimEnd().split(" ").map{ it.toInt() }.toTypedArray()
+    for (qItr in 1..q) {
+        val s1 = readLine()!!
 
-    val result = sockMerchant(n, ar)
+        val s2 = readLine()!!
 
-    println(result)
+        val result = twoStrings(s1, s2)
+
+        println(result)
+    }
 }
