@@ -1,4 +1,4 @@
-package InterviewPreparation
+package interviewpreperation
 
 import java.io.*
 import java.util.stream.Collectors
