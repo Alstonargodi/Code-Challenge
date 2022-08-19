@@ -1,32 +1,32 @@
-
-fun makeAnagram(a: String, b: String): Int {
+fun featuredProduct(products: Array<String>): String {
     // Write your code here
-    var result = 0
-    var match = 0
-    val aChar = a.toCharArray()
-    var bChar = b
-    val amountB = bChar.length
+    val productList = arrayListOf<String>()
+    products.sort()
 
-    aChar.forEach {
-        if (bChar.indexOf(it) != -1){
-            bChar = bChar.replaceFirst(""+it,"")
-            match++
+    var max = 0
+    val productMap : MutableMap<String,Int> = hashMapOf()
+
+    products.forEach {
+        if (productMap.containsKey(it)){
+            productMap[it] = productMap[it]?.plus(1) ?: 1
         }else{
-            result++
+            productMap[it] = 1
         }
+
+        productMap.keys.forEach {
+            val amount = productMap[it] ?: 1
+            if (amount > max){
+                max = amount
+            }
+        }
+
+        productMap.keys.forEach {
+            if (productMap[it] == max){
+                productList.add(it)
+            }
+        }
+        productList.sort()
     }
 
-    result = result + amountB - match
-
-    return result
-}
-
-fun main(args: Array<String>) {
-    val a = readLine()!!
-
-    val b = readLine()!!
-
-    val res = makeAnagram(a, b)
-
-    println(res)
+    return productList[productList.size-1]
 }
