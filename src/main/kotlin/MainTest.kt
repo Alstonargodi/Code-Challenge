@@ -1,24 +1,32 @@
 
-
-fun alternatingCharacters(s: String): Int {
+fun makeAnagram(a: String, b: String): Int {
     // Write your code here
     var result = 0
-    for (i in 1 until s.length step 2){
-        if (s[i] == s[i-1]){
+    var match = 0
+    val aChar = a.toCharArray()
+    var bChar = b
+    val amountB = bChar.length
+
+    aChar.forEach {
+        if (bChar.indexOf(it) != -1){
+            bChar = bChar.replaceFirst(""+it,"")
+            match++
+        }else{
             result++
         }
     }
+
+    result = result + amountB - match
+
     return result
 }
 
 fun main(args: Array<String>) {
-    val q = readLine()!!.trim().toInt()
+    val a = readLine()!!
 
-    for (qItr in 1..q) {
-        val s = readLine()!!
+    val b = readLine()!!
 
-        val result = alternatingCharacters(s)
+    val res = makeAnagram(a, b)
 
-        println(result)
-    }
+    println(res)
 }
