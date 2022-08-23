@@ -1,32 +1,44 @@
-fun featuredProduct(products: Array<String>): String {
+import java.util.*
+import kotlin.collections.ArrayList
+
+fun hourglassSum(arr: Array<Array<Int>>): Int {
     // Write your code here
-    val productList = arrayListOf<String>()
-    products.sort()
+    var intList : ArrayList<Int> = arrayListOf()
+    var maxSum = -64
 
-    var max = 0
-    val productMap : MutableMap<String,Int> = hashMapOf()
+    for(col in 0..4){
+        for (row in 0..4){
+            var sum = 0
+            sum += arr[col][row]
 
-    products.forEach {
-        if (productMap.containsKey(it)){
-            productMap[it] = productMap[it]?.plus(1) ?: 1
-        }else{
-            productMap[it] = 1
-        }
+            sum += arr[col][row+1]
+            sum += arr[col][row+2]
 
-        productMap.keys.forEach {
-            val amount = productMap[it] ?: 1
-            if (amount > max){
-                max = amount
+            sum += arr[col+1][row+1]
+
+            sum += arr[col+2][row]
+            sum += arr[col+2][row+1]
+            sum += arr[col+2][row+1]
+
+            if (maxSum < sum){
+                maxSum = sum
             }
         }
-
-        productMap.keys.forEach {
-            if (productMap[it] == max){
-                productList.add(it)
-            }
-        }
-        productList.sort()
     }
 
-    return productList[productList.size-1]
+    return maxSum
+
+}
+
+fun main(args: Array<String>) {
+
+    val arr = Array<Array<Int>>(6, { Array<Int>(6, { 0 }) })
+
+    for (i in 0 until 6) {
+        arr[i] = readLine()!!.trimEnd().split(" ").map{ it.toInt() }.toTypedArray()
+    }
+
+    val result = hourglassSum(arr)
+
+    println(result)
 }

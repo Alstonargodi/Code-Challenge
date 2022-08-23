@@ -2,25 +2,6 @@ package interviewpreperation
 
 fun ArrayLeftRotate(a: Array<Int>, d: Int): Array<Int> {
 
-    /*
-    var temp : Int = 0
-    var b : Int = 0
-    var c = a.length()
-
-    for(i in c.length){
-        c[i]
-        i++
-        b = c[i]
-        if( d < b){
-            temp=b
-            b.clear()
-        }
-    }
-
-     val list = a.toList()
-     Collection.rotateLeft(list,d)
-     print(list.toIntArray().joinToString())
-     */
 
     val array = a.copyOf()
     for((index,value) in a.withIndex()){
