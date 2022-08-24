@@ -1,14 +1,29 @@
 package interviewpreperation
 
 fun ArrayLeftRotate(a: Array<Int>, d: Int): Array<Int> {
+    val arraySize = a.size
+    val rotateArr : Array<Int> = a.copyOf()
 
+    var i = 0
+    var rotateIndex = d
 
-    val array = a.copyOf()
-    for((index,value) in a.withIndex()){
-        array[findindex(d, index, a.size)] = value
+    while ( rotateIndex < arraySize){
+        rotateArr[i] = a[rotateIndex]
+        i++
+        rotateIndex++
     }
-    return array
+
+    rotateIndex = 0
+
+    while ( rotateIndex < d){
+        rotateArr[i] = a[rotateIndex]
+        i++
+        rotateIndex++
+    }
+
+    return rotateArr
 }
+
 
 fun findindex (left : Int,currin : Int,arrSize: Int): Int{
     if(left > currin){
