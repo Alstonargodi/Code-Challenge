@@ -1,20 +1,19 @@
 package ds.book.linkedlist
 
-data class NodeLinked<T>(var value : T, var next: NodeLinked<T>?= null){
-    override fun toString(): String {
-        return if (next != null){
-            "$value -> ${next.toString()}"
-        }else{
-            "$value"
-        }
-    }
-}
 
 //arraylist
 class LinkedList<T> {
-    private var head : NodeLinked<T>? = null
-    private var tail : NodeLinked<T>? = null
+    private var head : Node<T>? = null
+    private var tail : Node<T>? = null
     var size = 0
+
+    override fun toString(): String {
+        if (isEmpty()){
+            return "empty list"
+        }else{
+            return head.toString()
+        }
+    }
 
     //check if empty node
     fun isEmpty(): Boolean{
@@ -23,7 +22,7 @@ class LinkedList<T> {
 
     //push new value
     fun pushOperation(value: T): LinkedList<T>{
-        head = NodeLinked(value = value, next = head)
+        head = Node(value = value, next = head)
         if (tail == null){
             tail = head
         }
@@ -37,14 +36,14 @@ class LinkedList<T> {
             pushOperation(value)
             return this
         }
-        tail?.next = NodeLinked(value = value)
+        tail?.next = Node(value = value)
         tail = tail?.next
         size++
         return this
     }
 
     //insert new value
-    fun nodeAt(index : Int): NodeLinked<T>?{
+    fun nodeAt(index : Int): Node<T>?{
         var currentNode = head
         var currentIndex = 0
 
@@ -54,12 +53,12 @@ class LinkedList<T> {
         }
         return currentNode
     }
-    fun insertOperation(value: T, afterNode: NodeLinked<T>): NodeLinked<T>{
+    fun insertOperation(value: T, afterNode: Node<T>): Node<T> {
         if (tail == afterNode){
             appendOperation(value)
             return tail!!
         }
-        val newNode = NodeLinked(
+        val newNode = Node(
             value = value,
             next = afterNode.next
         )
@@ -68,37 +67,48 @@ class LinkedList<T> {
         return  newNode
     }
 
-    override fun toString(): String {
+    //pop operation
+    fun popOperation(): T?{
+        if (!isEmpty())
+            size--
+        val result = head?.value
+        head = head?.next
+
         if (isEmpty()){
-            return "empty list"
-        }else{
-            return head.toString()
+            tail = null
         }
+        return result
     }
+
 }
 
 fun main(){
-    //node
-    val node1 = NodeLinked(1)
-    val node2 = NodeLinked(2)
-    val node3 = NodeLinked(3)
-    node1.next = node2 // call constructor
-    node2.next = node3
-//    print(node1)
+    popPushOperation()
+}
 
-    //push
+fun pushOperation(){
+    /*
+    Push operation
+    chain push tail first
+    0(1)
+ */
     val list = LinkedList<Int>()
-    //chain push tail first
     list.pushOperation(1)
         .pushOperation(2)
         .pushOperation(3)
         .pushOperation(4)
         .pushOperation(5)
         .pushOperation(6)
-//    print(list)
+    print(list)
+}
 
+fun appendOperation(){
+    /*
+    Append operation
+    chain list head first
+    0(1)
+ */
     val appendList = LinkedList<Int>()
-    //chain list head first
     appendList.appendOperation(1)
         .appendOperation(2)
         .appendOperation(2)
@@ -106,8 +116,15 @@ fun main(){
         .appendOperation(2)
         .appendOperation(2)
         .appendOperation(3)
-//    print(appendList)asd
+    print(appendList)
+}
 
+fun insertOperation(){
+    /*
+    insert operation
+    0(1)
+    nodeAt 0(index)
+ */
     val insertList = LinkedList<Int>()
     insertList.pushOperation(1)
         .pushOperation(2)
@@ -115,8 +132,6 @@ fun main(){
         .pushOperation(4)
         .pushOperation(5)
         .pushOperation(6)
-
-
     print("before insert $insertList")
     var middleNode = insertList.nodeAt(1)
     for (i in 1..insertList.size){
@@ -128,5 +143,18 @@ fun main(){
         }
     }
     print("after insert $insertList")
+}
 
+fun popPushOperation(){
+    val list = LinkedList<Int>()
+    list.pushOperation(1)
+        .pushOperation(2)
+        .pushOperation(3)
+        .pushOperation(4)
+        .pushOperation(5)
+        .pushOperation(6)
+    print("push value :$list \n")
+    val popValue = list.popOperation()
+    print("after pop :$list \n")
+    print("remove value: $popValue \n")
 }
