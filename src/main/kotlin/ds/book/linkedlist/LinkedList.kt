@@ -1,6 +1,5 @@
 package ds.book.linkedlist
 
-
 //arraylist
 class LinkedList<T> {
     private var head : Node<T>? = null
@@ -80,10 +79,34 @@ class LinkedList<T> {
         return result
     }
 
+    //remove operation
+    fun removeLast(): T?{
+        val head = head ?: return null
+        if(head.next == null ) return popOperation()
+        size--
+
+        var prev = head
+        var current = head
+
+        var next = current.next
+        while (next != null){
+            prev = current
+            current = next
+            next = current.next
+        }
+
+        prev.next = null
+        tail = prev
+        return current.value
+    }
+
+    //removeAfter
+
 }
 
 fun main(){
     popPushOperation()
+    removeLastOperation()
 }
 
 fun pushOperation(){
@@ -146,6 +169,7 @@ fun insertOperation(){
 }
 
 fun popPushOperation(){
+    //remove head
     val list = LinkedList<Int>()
     list.pushOperation(1)
         .pushOperation(2)
@@ -155,6 +179,22 @@ fun popPushOperation(){
         .pushOperation(6)
     print("push value :$list \n")
     val popValue = list.popOperation()
+    print("after pop :$list \n")
+    print("remove value: $popValue \n")
+}
+
+
+fun removeLastOperation(){
+    //remove tail last 0(n)
+    val list = LinkedList<Int>()
+    list.pushOperation(1)
+        .pushOperation(2)
+        .pushOperation(3)
+        .pushOperation(4)
+        .pushOperation(5)
+        .pushOperation(6)
+    print("push value :$list \n")
+    val popValue = list.removeLast()
     print("after pop :$list \n")
     print("remove value: $popValue \n")
 }
