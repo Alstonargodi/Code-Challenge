@@ -101,12 +101,21 @@ class LinkedList<T> {
     }
 
     //removeAfter
-
+    fun removeAfter(node: Node<T>): T?{
+        val result = node.next?.value
+        if (node.next == tail){
+            tail = node
+        }
+        if (node.next != null){
+            size--
+        }
+        node.next = node.next?.next
+        return result
+    }
 }
 
 fun main(){
-    popPushOperation()
-    removeLastOperation()
+    removeAfterOperation()
 }
 
 fun pushOperation(){
@@ -169,7 +178,7 @@ fun insertOperation(){
 }
 
 fun popPushOperation(){
-    //remove head
+    //remove head 0(1)
     val list = LinkedList<Int>()
     list.pushOperation(1)
         .pushOperation(2)
@@ -186,15 +195,34 @@ fun popPushOperation(){
 
 fun removeLastOperation(){
     //remove tail last 0(n)
-    val list = LinkedList<Int>()
-    list.pushOperation(1)
+    val listb = LinkedList<Int>()
+    listb.pushOperation(1)
         .pushOperation(2)
         .pushOperation(3)
         .pushOperation(4)
         .pushOperation(5)
         .pushOperation(6)
-    print("push value :$list \n")
-    val popValue = list.removeLast()
-    print("after pop :$list \n")
+    print("push value :$listb \n")
+    val popValue = listb.removeLast()
+    print("after pop :$listb \n")
     print("remove value: $popValue \n")
+}
+
+fun removeAfterOperation(){
+    //remove next node 0(1)
+    val listc = LinkedList<Int>()
+    listc.pushOperation(1)
+        .pushOperation(2)
+        .pushOperation(3)
+        .pushOperation(4)
+        .pushOperation(5)
+        .pushOperation(6)
+    print("removing at index :$listc \n")
+    val index = 2
+    val node = listc.nodeAt(index)
+    val removeValue = node?.let { listc.removeAfter(it) }
+
+
+    print("after remove :$listc \n")
+    print("remove value: $removeValue \n")
 }
