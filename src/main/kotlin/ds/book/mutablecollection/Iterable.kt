@@ -1,19 +1,14 @@
 package ds.book.mutablecollection
 
+import ds.book.linkedlist.LinkedList
 import ds.book.linkedlist.Node
 
 var size = 0
     private set
 
-class LinkedList<T>: Iterable<T> {
-    override fun iterator(): Iterator<T> {
-        return LinkedListIterator(this)
-    }
-}
-
 class LinkedListIterator <T>(
-    private val list : LinkedList<T>
-) : Iterator<T>{
+    private val list : ds.book.linkedlist.LinkedList<T>
+) : Iterator<T>, MutableIterator<T>{
     private var index = 0
     private var lastNode : Node<T>? = null
 
@@ -32,5 +27,34 @@ class LinkedListIterator <T>(
 
         index++
         return lastNode!!.value
+    }
+
+    override fun remove() {
+        if (index == 1){
+            list.popOperation()
+        }else{
+            val prevNode = list.nodeAt(
+                index-2
+            ) ?: return
+            list.removeAfter(prevNode)
+            lastNode = prevNode
+        }
+        index--
+    }
+}
+
+fun main(){
+    printingDoubles()
+}
+
+fun printingDoubles(){
+    val list = LinkedList<Int>()
+    list.pushOperation(3)
+    list.pushOperation(2)
+    list.pushOperation(1)
+    print(list)
+
+    for (item in list){
+        print("\n Double: ${item*2}")
     }
 }
