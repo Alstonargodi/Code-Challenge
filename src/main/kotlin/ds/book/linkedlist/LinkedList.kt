@@ -7,7 +7,7 @@ class LinkedList<T>
     : Iterable<T>, Collection<T>, MutableIterable<T>,MutableCollection<T>{
     private var head : Node<T>? = null
     private var tail : Node<T>? = null
-    var size = 0
+    override var size = 0
 
     override fun toString(): String {
         if (isEmpty()){
@@ -18,7 +18,7 @@ class LinkedList<T>
     }
 
     //check if empty node
-    fun isEmpty(): Boolean{
+    override fun isEmpty(): Boolean{
         return size == 0
     }
 
@@ -153,14 +153,35 @@ class LinkedList<T>
     }
 
     override fun remove(element: T): Boolean {
-        Tv
+        val iterator = iterator()
+        while (iterator.hasNext()){
+            val item = iterator.next()
+            if (item == element){
+                iterator.remove()
+                return true
+            }
+        }
+        return false
     }
 
     override fun removeAll(elements: Collection<T>): Boolean {
-        TODO("Not yet implemented")
+        var result = false
+        for(item in elements){
+            result = remove(item) || result
+        }
+        return result
     }
 
     override fun retainAll(elements: Collection<T>): Boolean {
-        TODO("Not yet implemented")
+        var result = false
+        val iterator = this.iterator()
+        while (iterator.hasNext()){
+            val item = iterator.next()
+            if (!elements.contains(item)){
+                iterator.remove()
+                result = true
+            }
+        }
+        return result
     }
 }
