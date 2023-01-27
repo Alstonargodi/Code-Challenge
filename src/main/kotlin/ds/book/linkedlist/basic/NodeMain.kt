@@ -1,4 +1,4 @@
-package ds.book.linkedlist
+package ds.book.linkedlist.basic
 
 //any type
 data class Node<T>(var value : T, var next: Node<T>?= null){

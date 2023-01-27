@@ -1,10 +1,10 @@
-package ds.book.linkedlist
+package ds.book.linkedlist.basic
 
 var size = 0
     private set
 
 class LinkedListIterator <T>(
-    private val list : ds.book.linkedlist.LinkedList<T>
+    private val list : LinkedListMain<T>
 ) : Iterator<T>, MutableIterator<T>{
     private var index = 0
     private var lastNode : Node<T>? = null
@@ -45,7 +45,7 @@ fun main(){
 }
 
 fun printingDoubles(){
-    val list = LinkedList<Int>()
+    val list = LinkedListMain<Int>()
     list.pushOperation(3)
     list.pushOperation(2)
     list.pushOperation(1)

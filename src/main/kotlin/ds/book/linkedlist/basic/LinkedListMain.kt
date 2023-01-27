@@ -1,9 +1,8 @@
-package ds.book.linkedlist
+package ds.book.linkedlist.basic
 
-import ds.book.mutablecollection.LinkedListIterator
 
 //arraylist
-class LinkedList<T>
+class LinkedListMain<T>
     : Iterable<T>, Collection<T>, MutableIterable<T>,MutableCollection<T>{
     private var head : Node<T>? = null
     private var tail : Node<T>? = null
@@ -23,7 +22,7 @@ class LinkedList<T>
     }
 
     //push new value
-    fun pushOperation(value: T): LinkedList<T>{
+    fun pushOperation(value: T): LinkedListMain<T> {
         head = Node(value = value, next = head)
         if (tail == null){
             tail = head
@@ -33,7 +32,7 @@ class LinkedList<T>
     }
 
     //append new value
-    fun appendOperation(value: T): LinkedList<T>{
+    fun appendOperation(value: T): LinkedListMain<T> {
         if (isEmpty()){
             pushOperation(value)
             return this
