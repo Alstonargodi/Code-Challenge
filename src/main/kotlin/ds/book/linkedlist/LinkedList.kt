@@ -134,6 +134,7 @@ class LinkedList<T>
         return true
     }
 
+    //mutable collection
     override fun add(element: T): Boolean {
         appendOperation(element)
         return true

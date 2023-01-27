@@ -1,7 +1,4 @@
-package ds.book.mutablecollection
-
-import ds.book.linkedlist.LinkedList
-import ds.book.linkedlist.Node
+package ds.book.linkedlist
 
 var size = 0
     private set
