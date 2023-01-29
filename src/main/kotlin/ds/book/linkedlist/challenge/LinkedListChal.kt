@@ -36,5 +36,21 @@ class LinkedListChal<T> {
         return currentNode
     }
 
+    //append operator 0(1)
+    fun append(value : T){
+
+        //push the value
+        if(isEmpty()){
+            push(value)
+            return
+        }
+
+        tail?.next = NodeChal(
+            value = value
+        )
+
+        tail = tail?.next
+        size++
+    }
 }
 
