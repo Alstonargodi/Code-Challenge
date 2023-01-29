@@ -1,4 +1,4 @@
-package ds.book
+package ds.book.complexcity
 
 class LogarithmaticTime {
 

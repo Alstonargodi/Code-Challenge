@@ -1,4 +1,4 @@
-package ds.book
+package ds.book.complexcity
 
 class PartTwo {
     fun checkFirst(names : List<String>){
