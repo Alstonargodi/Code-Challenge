@@ -1,8 +1,8 @@
-package ds.book.stack
+package ds.book.stack.challenges
 
 import java.util.Stack
 
-class StackOperator<T : Any>: IStack<T> {
+class StackOperator<T>(): IStack<T> {
     private val storage = arrayListOf<T>()
     override fun toString() = buildString {
         appendln("----top-----")
@@ -38,11 +38,10 @@ class StackOperator<T : Any>: IStack<T> {
             }
             return stack
         }
-
-        fun <Element>stackOf(vararg element: Element): IStack<Element> {
-            return StackOperator.create(element.asList())
-        }
     }
+//    fun <Element>stackOf(vararg element: Element): IStack<Element> {
+//        return create(element.asList())
+//    }
 }
 
 fun main(){
