@@ -1,6 +1,5 @@
 package ds.book.stack.challenges
 
-import ds.book.stack.StackOperator
 
 fun <T>LinkedListStack<T>.printReverse(){
     val stack = StackOperator<T>()
