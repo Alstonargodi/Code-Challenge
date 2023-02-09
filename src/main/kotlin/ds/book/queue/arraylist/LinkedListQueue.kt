@@ -1,6 +1,8 @@
-package ds.book.queue
+package ds.book.queue.arraylist
 
-import ds.book.linkedlist.basic.LinkedListMain
+import ds.book.queue.DoublyLinkedList
+import ds.book.queue.Queue
+
 
 class LinkedListQueue<T>: Queue<T> {
     private val list = DoublyLinkedList<T>()
@@ -12,16 +14,15 @@ class LinkedListQueue<T>: Queue<T> {
         return true
     }
 
-    override fun dequeue(): T? {
-        val firstNode = list.first() ?: return null
-        size--
-        return list.remove(firstNode)
-    }
 
     override val count: Int
         get() = size
 
     override fun peek(): T? {
+        TODO("Not yet implemented")
+    }
+
+    override fun dequeue(): T? {
         TODO("Not yet implemented")
     }
 }

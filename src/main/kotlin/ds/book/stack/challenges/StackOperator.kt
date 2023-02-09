@@ -5,11 +5,9 @@ import java.util.Stack
 class StackOperator<T>(): IStack<T> {
     private val storage = arrayListOf<T>()
     override fun toString() = buildString {
-        appendln("----top-----")
         storage.asReversed().forEach {
             appendln("$it")
         }
-        appendln("-------------")
     }
 
     override fun push(element: T) {
