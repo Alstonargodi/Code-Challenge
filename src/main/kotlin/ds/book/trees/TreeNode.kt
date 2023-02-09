@@ -1,7 +1,6 @@
 package ds.book.trees
 
-import sun.reflect.generics.tree.Tree
-import sun.reflect.generics.visitor.Visitor
+import ds.book.queue.Queue
 
 typealias Visitor<T> = (TreeNode<T>) -> Unit
 
@@ -10,11 +9,37 @@ class TreeNode<T>(val value : T) {
 
     fun add(child: TreeNode<T>) = children.add(child)
 
-    fun foreEachTree(visit : Visitor<T>){
+    fun forEachDepthFirst(visit : Visitor<T>){
         visit(this)
         children.forEach {
-            it.foreEach(visit)
+            it.forEachDepthFirst(visit)
         }
+    }
+
+    fun forEachLevelOrder(visit: Visitor<T>){
+//        visit(this)
+//        val queue = Queue<TreeNode<T>>()
+//        children.forEach { queue.enqueue(it) }
+//
+//        var node = queue.dequeue()
+//        while (node != null){
+//            visit(node)
+//            node.children.forEach{ queue.enqueue(it) }
+//            node = queue.dequeue()
+//        }
+    }
+
+    fun search(value : T): TreeNode<T>?{
+        var result: TreeNode<T>? = null
+
+        //depth search
+        forEachDepthFirst {
+            if (it.value == value){
+                result = it
+                print(it)
+            }
+        }
+        return result
     }
 }
 fun makeBevarageTree(): TreeNode<String>{
@@ -74,5 +99,9 @@ fun main(){
 //    print(tree)
 
     val tree = makeBevarageTree()
-    tree.foreEachTree{ println(it.value) }
+//    tree.forEachDepthFirst{ println(it.value) }
+
+    tree.search("soda")?.let {
+        println("found node: ${it.value}")
+    } ?: print("cant find")
 }
