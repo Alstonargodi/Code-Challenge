@@ -1,4 +1,4 @@
-package leetcode
+package ds.leetcode
 
 fun twoSum(nums: IntArray, target: Int): IntArray {
     val result = mutableMapOf<Int,Int>()

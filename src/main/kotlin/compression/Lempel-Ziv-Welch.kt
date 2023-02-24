@@ -1,11 +1,4 @@
-package compressionalgo
-
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
-import java.io.InputStream
-import java.io.OutputStream
-import java.util.HashMap
+package compression
 
 //fun compress(inputFile: File, outputFile: File) {
 //    val input: InputStream = FileInputStream(inputFile)

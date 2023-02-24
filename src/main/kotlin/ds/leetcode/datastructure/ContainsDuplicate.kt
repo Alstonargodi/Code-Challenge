@@ -1,4 +1,4 @@
-package leetcode.datastructure
+package ds.leetcode.datastructure
 
 /*
 berdasarkan element pada index

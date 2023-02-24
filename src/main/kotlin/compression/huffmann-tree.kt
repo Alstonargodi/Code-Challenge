@@ -1,7 +1,4 @@
-package compressionalgo
-
-import java.io.*
-import java.util.*
+package compression
 
 //fun compressImage(inputFile: String, outputFile: String) {
 //    // Read the input image data into a byte array

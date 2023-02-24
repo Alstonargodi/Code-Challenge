@@ -1,4 +1,4 @@
-package compressionalgo
+package compression
 
 import java.util.*
 

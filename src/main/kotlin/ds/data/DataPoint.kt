@@ -1,4 +1,4 @@
-package data
+package ds.data
 
 data class DataPoint(
     val map : Map<String,Any>,

@@ -1,12 +1,4 @@
-package compressionalgo
-
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
-import java.io.InputStream
-import java.io.OutputStream
-import java.util.PriorityQueue
-import java.util.HashMap
+package compression
 
 //data class Node(val symbol: Byte?, var weight: Int, var left: Node?, var right: Node?)
 //

@@ -1,12 +1,4 @@
-package compressionalgo
-
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
-import java.io.InputStream
-import java.io.OutputStream
-import java.util.zip.Deflater
-import java.util.zip.Inflater
+package compression
 
 //fun compress(inputFile: File, outputFile: File) {
 //    val input: InputStream = FileInputStream(inputFile)

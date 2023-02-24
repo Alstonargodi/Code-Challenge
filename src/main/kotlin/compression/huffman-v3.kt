@@ -1,7 +1,4 @@
-package compressionalgo
-
-import java.io.ByteArrayOutputStream
-import java.util.*
+package compression
 
 //data class Node(
 //    val symbol: Int? = null,
