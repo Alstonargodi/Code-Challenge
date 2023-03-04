@@ -53,8 +53,8 @@ fun main( ) {
     // Set the data in the tree. Soon, the tree is created.
     val decisionTree = RandomForest( dataFrame )
     val sample = HashMap<String,String>().apply {
-        put( "Taste" , "Sweet" )
-        put( "Temperature" , "Hot" )
+        put( "Taste" , "Salty" )
+        put( "Temperature" , "Cold" )
         put( "Texture" , "Soft" )
     }
 

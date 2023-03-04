@@ -35,7 +35,7 @@ class RandomForest( private var data : DataFrame ) {
             println( "Prediction ${i+1} DecisionTree is ${treeOutputs[i]}")
         }
         // Get the majority label, which is our final prediction for the given sample.
-        val mostVotedLabel = treeOutputs.groupingBy{ it }.eachCount().maxBy{ entry -> entry.value }!!.key
+        val mostVotedLabel = treeOutputs.groupingBy{ it }.eachCount().maxByOrNull { entry -> entry.value }!!.key
         println( "Most voted label : $mostVotedLabel" )
         return mostVotedLabel
     }
