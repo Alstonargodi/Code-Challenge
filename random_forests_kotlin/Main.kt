@@ -1,65 +1,127 @@
 
 import com.ml.quaterion.decisiontree.DataFrame
-import com.ml.quaterion.decisiontree.DecisionTree
 import com.ml.quaterion.decisiontree.RandomForest
+import com.ml.quaterion.decisiontree.covid.RandomForestTree
+import com.ml.quaterion.decisiontree.covid.TableFrame
 import kotlin.collections.ArrayList
 
-/*
-* The method which inputs the data to the class DecisionTree.
-* */
+
 fun main( ) {
-
-    // Get some sample data
     val dataFrame = DataFrame()
+
+    //outlook
     dataFrame.addColumn(
         arrayOf(
-            "Salty",
-            "Spicy",
-            "Spicy",
-            "Spicy",
-            "Spicy",
-            "Sweet",
-            "Salty",
-            "Sweet",
-            "Spicy",
-            "Salty"
+            "Sunny",
+            "Sunny",
+            "Overcast",
+            "Rain",
+            "Rain",
+            "Rain",
+            "Overcast",
+            "Sunny",
+            "Sunny",
+            "Rain",
+            "Sunny",
+            "Overcast",
+            "Overcast",
+            "Rain"
         ).toList() as ArrayList<String>,
-        "Taste"
-    )
-    dataFrame.addColumn(
-        arrayOf("Hot", "Hot", "Hot", "Cold", "Hot", "Cold", "Cold", "Hot", "Cold", "Hot").toList() as ArrayList<String>,
-        "Temperature"
-    )
-    dataFrame.addColumn(
-        arrayOf(
-            "Soft",
-            "Soft",
-            "Hard",
-            "Hard",
-            "Hard",
-            "Soft",
-            "Soft",
-            "Soft",
-            "Soft",
-            "Hard"
-        ).toList() as ArrayList<String>,
-        "Texture"
-    )
-    dataFrame.addColumn(
-        arrayOf("No", "No", "Yes", "No", "Yes", "Yes", "No", "Yes", "Yes", "Yes").toList() as ArrayList<String>,
-        "Label"
+        "Outlook"
     )
 
-    // Set the data in the tree. Soon, the tree is created.
+    //temperature
+    dataFrame.addColumn(
+        arrayOf(
+            "Hot",
+            "Hot",
+            "Hot",
+            "Mild",
+            "Cool",
+            "Cool",
+            "Cool",
+            "Mild",
+            "Cool",
+            "Mild",
+            "Mild",
+            "Mild",
+            "Hot",
+            "Mild",
+        ).toList() as ArrayList<String>,
+        "Temp"
+    )
+
+    dataFrame.addColumn(
+        arrayOf(
+            "High",
+            "High",
+            "High",
+            "High",
+            "Normal",
+            "Normal",
+            "Normal",
+            "High",
+            "Normal",
+            "Normal",
+            "Normal",
+            "High",
+            "Normal",
+            "High",
+        ).toList() as ArrayList<String>,
+        "Humidity"
+    )
+
+    dataFrame.addColumn(
+        arrayOf(
+            "High",
+            "High",
+            "High",
+            "High",
+            "Normal",
+            "Normal",
+            "Normal",
+            "High",
+            "Normal",
+            "Normal",
+            "Normal",
+            "High",
+            "Normal",
+            "High",
+        ).toList() as ArrayList<String>,
+        "Wind"
+    )
+
+    dataFrame.addColumn(
+        arrayOf(
+            "No",
+            "No",
+            "Yes",
+            "Yes",
+            "Yes",
+            "Yes",
+            "Yes",
+            "No",
+            "Yes",
+            "Yes",
+            "Yes",
+            "Yes",
+            "Yes",
+            "No",
+        ).toList() as ArrayList<String>,
+        "Decision"
+    )
+
     val decisionTree = RandomForest( dataFrame )
     val sample = HashMap<String,String>().apply {
-        put( "Taste" , "Salty" )
-        put( "Temperature" , "Cold" )
-        put( "Texture" , "Soft" )
+        put( "Outlook" , "Sunny" )
+        put( "Temp" , "Hot" )
+        put( "Humidity" , "High" )
+        put( "Wind" , "Strong" )
+        put( "Decision" , "Yes" )
     }
 
     // Print the tree as a `HashMap`.
-    println( decisionTree.predict( sample ) )
+//    println( decisionTree.predict( sample ) )
     println( decisionTree )
 
 }
