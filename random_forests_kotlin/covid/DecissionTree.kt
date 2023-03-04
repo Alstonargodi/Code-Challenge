@@ -3,7 +3,7 @@ package com.ml.quaterion.decisiontree.covid
 class DecissionTree(
     private var data : TableFrame
 ) {
-    private val labelColumnName = "Label"
+    private val labelColumnName = "Decision"
     private var finalisedTree : HashMap<String,Any>? = null
 
     init {
@@ -81,6 +81,7 @@ class DecissionTree(
             val featureEntropy = findEntropyFeature(data,name)
             informationGain.add(labelEntropy-featureEntropy)
         }
+        println("InformationGain : $informationGain")
         return featureNames[argMax(informationGain)]
     }
 
@@ -148,6 +149,7 @@ class DecissionTree(
             }
             featureEntropy += -(deCount/labels.count()) * entropy
         }
+        println("entropy Feature : $featureEntropy")
         return Math.abs(featureEntropy)
     }
 
