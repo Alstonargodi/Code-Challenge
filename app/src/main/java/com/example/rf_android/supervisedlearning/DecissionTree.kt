@@ -1,15 +1,17 @@
 package com.example.rf_android.supervisedlearning
 
 import com.example.rf_android.entity.DataFrame
+import com.example.rf_android.entity.ResultEntropy
 
 class DecissionTree(
     private var data : DataFrame
 ) {
     private val labelName = "Decision"
-    private var endTree : HashMap<String,Any>? = null
+    var endTree : HashMap<String,Any>? = null
+    lateinit var informationGainResult : ResultEntropy
 
     init {
-        endTree
+        endTree = createTree(data,null)
     }
 
     fun predict ( x : HashMap<String,String> ) : String {
@@ -48,7 +50,9 @@ class DecissionTree(
         data: DataFrame,
         input : HashMap<String,Any>?
     ): HashMap<String,Any>{
-        val highestFeature = informationGain(data)
+        val informationGain = informationGain(data)
+        informationGainResult = informationGain
+        val highestFeature = informationGain.maxResult
         val attributes = data.getData()[highestFeature]!!.distinct()
         var tree = input
         if ( tree == null ) {
@@ -120,15 +124,21 @@ class DecissionTree(
         return outputHashmap
     }
 
-    private fun informationGain(data : DataFrame): String{
+    private fun informationGain(data : DataFrame): ResultEntropy{
         val featureNames = data.getFeatureColumnNames()
         val informationGain = ArrayList<Double>()
+        val names = ArrayList<String>()
         for(name in featureNames){
             val labelEntropy = entropyLabels(data)
             val featureEntropy = entropyFeature(data,name)
             informationGain.add(labelEntropy-featureEntropy)
+            names.add(name)
         }
-        return featureNames[argMax(informationGain)]
+        return ResultEntropy(
+            featureNames[argMax(informationGain)],
+            names,
+            informationGain
+        )
     }
 
     private fun entropyLabels(

@@ -9,6 +9,8 @@ class RandomForest(
     private val numTrees = 5
     private val datasetBoostrap = 10
     private var forest : ArrayList<DecissionTree> = ArrayList()
+    var informationGainLabel = ArrayList<String>()
+    var informationGainResult = ArrayList<Double>()
 
     init {
         // Create the bootstrapped datasets
@@ -55,7 +57,10 @@ class RandomForest(
         for ( i in 0 until numTrees ) {
             // Initialize a DecisionTree with ith bootstrapped dataset. Add to the forest.
             println( "Creating ${i+1} DecisionTree ..." )
-            forest.add( DecissionTree( dataFrames[ i ] ) )
+            var result = DecissionTree(dataFrames[i])
+            informationGainLabel = result.informationGainResult.entropyResult
+            informationGainResult = result.informationGainResult.informationGain
+            forest.add(result)
         }
     }
 }

@@ -8,7 +8,8 @@ import com.example.rf_android.databinding.ItemEntityBinding
 import com.example.rf_android.entity.EntityEntropi
 
 class MainRecyclerViewAdapter(
-    private var dataList: List<EntityEntropi>
+    private var dataList: List<Double>,
+    private var nameList : List<String>
 ): RecyclerView.Adapter<MainRecyclerViewAdapter.ViewHolder>() {
 
     class ViewHolder(val binding : ItemEntityBinding)
@@ -28,10 +29,11 @@ class MainRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-       val item = dataList[position]
+        val item = dataList[position]
+        val name = nameList[position]
         holder.binding.apply {
-            tvInformationGain.text = item.informationGain
-            TvCondition.text = item.name
+            tvInformationGain.text = item.toString()
+            TvCondition.text = name
         }
     }
 
