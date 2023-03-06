@@ -1,4 +1,4 @@
-package com.ml.quaterion.decisiontree.covid
+package com.ml.quaterion.decisiontree.weather
 
 import kotlin.random.Random
 

@@ -1,6 +1,5 @@
-package com.ml.quaterion.decisiontree.covid
+package com.ml.quaterion.decisiontree.weather
 
-import com.ml.quaterion.decisiontree.DataFrame
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
