@@ -7,11 +7,17 @@ import kotlin.collections.ArrayList
 fun main( ) {
 
     val longText =
-        "been information information info me myself been information information info me myself"
+        "bagaimana cara membuat akun jenius"
 
-    val summarize = TextSummary().summarize(longText, compressionRate = 0.1)
+    val longText2 =
+        "been been information  information  information info me myself been information information info me myself"
+
+    val summarize = TextSummary().summarize(
+        longText, compressionRate = 0.8F
+    )
 
     println(summarize)
+
 
 //    val dataFrame = TableFrame()
 //

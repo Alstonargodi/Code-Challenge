@@ -20,9 +20,9 @@ class Tokenizer {
         while (matcher.find()){
             sentences.add(matcher.group())
         }
-        println(
-            "paragraph setence : $sentences"
-        )
+//        println(
+//            "paragraph setence : $sentences"
+//        )
         return sentences.toTypedArray()
     }
 
@@ -53,9 +53,9 @@ class Tokenizer {
                 it.equals(word)
             }
         }
-        println(
-            "build vocab : $vocab"
-        )
+//        println(
+//            "build vocab : $vocab"
+//        )
         return vocab
     }
 
@@ -79,7 +79,7 @@ class Tokenizer {
     }
 
     // Checks if the compression rate lie in ( 0 , 1 ].
-    fun checkRate( rate : Double ) : Boolean {
+    fun checkRate( rate : Float ) : Boolean {
         return rate > 0.0 && rate <= 1.0
     }
 

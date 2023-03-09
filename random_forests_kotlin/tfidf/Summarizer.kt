@@ -1,35 +1,29 @@
 package com.ml.quaterion.decisiontree.tfidf
 
+import com.ml.quaterion.decisiontree.tfidf.stopword.docWords
+import com.ml.quaterion.decisiontree.tfidf.stopword.docsWords
+import kotlin.math.sqrt
+
 class Summarizer {
     private val tokenizer = Tokenizer()
     fun compute(
         text : String,
-        rate : Double
+        rate : Float
     ): Array<Int>{
 
-        // Check whether the rate lies in the given range.
-        if ( !tokenizer.checkRate( rate ) ){
-            throw Exception( "The compression rate must lie in the interval ( 0 , 1 ].")
-        }
-
-        // Get sentences from the text.
         val sentences = tokenizer.paragraphSetentence( tokenizer.removeLineBreaks( text ) )
         val sentenceTokens = sentences.map { tokenizer.sentenceToToken( it ) }
         val tokensList = ArrayList<String>()
 
-        // Collect all the words present in the text.
         sentenceTokens.forEach {
             tokensList.addAll( it )
         }
 
-        // Create a ( word , frequency ) vocab.
         val vocab = tokenizer.buildVocab(
             tokensList.toTypedArray()
         )
         val tfidfSumList = ArrayList<Float>()
 
-        // For each sentence, calculate TF, IDF and then TFIDF. Take the sum of all TF-IDF scores for all words in the
-        // sentence and append it to a list.
         for (tokenizedSentence in sentenceTokens){
             val termFrequency = computeTermFrequency(
                 tokenizedSentence,
@@ -38,7 +32,7 @@ class Summarizer {
             val inverseDocumentFrequency =
                 computeInverseDocumentFrequency(
                     termFrequency,
-                    sentenceTokens.toTypedArray()
+                    docs = docsWords
                 )
             val tfIDF = computeTFIDF(
                 termFrequency,
@@ -46,12 +40,64 @@ class Summarizer {
             )
             tfidfSumList.add(tfIDF.values.sum())
             println(
-                "termFrequency : $termFrequency"
+                "TF : $termFrequency"
             )
             println(
-                "inverseDocumentFrequency : $inverseDocumentFrequency"
+                "IDF : $inverseDocumentFrequency"
             )
+            println(
+                "TFIDF : $tfIDF"
+            )
+            println("==========")
         }
+
+        docWords.forEach {docvalue ->
+
+            val sentencesDoc = tokenizer.paragraphSetentence(
+                tokenizer.removeLineBreaks(docvalue)
+            )
+            val sentenceTokensDoc = sentencesDoc.map { tokenizer.sentenceToToken( it ) }
+            val tokensListDoc = ArrayList<String>()
+
+
+            sentenceTokensDoc.forEach {
+                tokensListDoc.addAll(it)
+            }
+
+            // Create a ( word , frequency ) vocab.
+            val vocabDoc = tokenizer.buildVocab(
+                tokensListDoc.toTypedArray()
+            )
+
+            for (docSetence in sentenceTokensDoc){
+
+                val termFrequencyDoc = computeTermFrequency(
+                    docSetence,
+                    vocabDoc
+                )
+                val inverseDocumentFrequencyDoc =
+                    computeInverseDocumentFrequency(
+                        termFrequencyDoc,
+                        docs = docsWords
+                    )
+                val tfIDFDoc = computeTFIDF(
+                    termFrequencyDoc,
+                    inverseDocumentFrequencyDoc
+                )
+                println(
+                    "TF-DOC : $termFrequencyDoc"
+                )
+                println(
+                    "IDF-Doc : $inverseDocumentFrequencyDoc"
+                )
+                println(
+                    "TFIDF-doc : $tfIDFDoc"
+                )
+                println("==========")
+            }
+        }
+
+
 
         // Get the indices of top N maximum values from `weightedFreqSums`.
         val N = Math.floor((sentences.size * rate).toDouble()).toInt()
@@ -63,7 +109,7 @@ class Summarizer {
             },
             N
         )
-        println(N.toString())
+
         return topNIndices
     }
 
@@ -76,26 +122,26 @@ class Summarizer {
             freqMatrix[word] = 0f
         }
         for (word in s) {
-            freqMatrix[word] = freqMatrix[word]!! + 1f
+            freqMatrix[word] = freqMatrix[word]!! + 1
         }
         val tfFreqMatrix = HashMap<String,Float>()
         for ((word, count) in freqMatrix) {
-            tfFreqMatrix[word] = count / s.size.toFloat() // Calculation of TF
+            tfFreqMatrix[word] = 1F // jika frekuensi hadir maka beri 1
         }
         return tfFreqMatrix
     }
 
     private fun computeInverseDocumentFrequency(
         freqMatrix : HashMap<String,Float>,
-        docs : Array<Array<String> >
+        docs : Array<Array<String>>
     ): HashMap<String,Float> {
         val freqInDocMap = HashMap<String,Float>()
         for(word in freqMatrix.keys ){
             freqInDocMap[word] = 0f
         }
-        for ( doc in docs ){
-            for( word in freqMatrix.keys ){
-                if ( doc.contains( word )){
+        for (doc in docs){
+            for(word in freqMatrix.keys ){
+                if (doc.contains(word)){
                     freqInDocMap[ word ] = freqInDocMap[ word ]!! + 1f
                 }
             }
@@ -103,14 +149,17 @@ class Summarizer {
         val numDocs = docs.size.toFloat()
         val idfMap = HashMap<String,Float>()
         for ((word,freqInDoc) in freqInDocMap ){
-            idfMap[word] = Math.log10(
+            val freq = Math.log10(
                 numDocs.toDouble() / freqInDoc.toDouble()
             ).toFloat()
+            idfMap[word] = freq
+//            println(
+//                "calculationResultIDF : $word"
+//            )
         }
         return idfMap
     }
 
-    // Calculate the final product of the TF and IDF scores.
     private fun computeTFIDF(
         tfMatrix : HashMap<String,Float> ,
         idfMatrix : HashMap<String,Float>
@@ -119,10 +168,17 @@ class Summarizer {
         for( word in tfMatrix.keys ){
             tfidfMatrix[word] = tfMatrix[ word ]!! * idfMatrix[ word ]!!
         }
-
-        println(
-            "TFIDF matrix : ${tfidfMatrix}"
-        )
         return tfidfMatrix
+    }
+
+
+    private fun cosineCalculation(
+        tfresult : HashMap<String, Float>
+    ){
+        var cosineResult = HashMap<String,Float>()
+
+        for ((keys,value) in tfresult){
+            cosineResult[keys] = sqrt(value*value)
+        }
     }
 }

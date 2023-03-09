@@ -5,16 +5,16 @@ public class TextSummary {
 
     fun summarize(
         text : String,
-        compressionRate : Double
+        compressionRate : Float
     ): String{
         val setences = Tokenizer().paragraphSetentence(
             tokenizer.removeLineBreaks(text)
         )
         val sumarize = Summarizer()
         val result = sumarize.compute(text,compressionRate)
-        println(
-            "summaries $result"
-        )
+//        println(
+//            "summaries $result"
+//        )
         return buildString(setences,result)
     }
 
