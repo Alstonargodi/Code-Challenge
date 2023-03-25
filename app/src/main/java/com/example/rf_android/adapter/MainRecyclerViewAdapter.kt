@@ -12,6 +12,12 @@ class MainRecyclerViewAdapter(
     private var nameList : List<String>
 ): RecyclerView.Adapter<MainRecyclerViewAdapter.ViewHolder>() {
 
+    private lateinit var detailCallback: DetailCallback
+
+    fun detailOnclickCallback(callback : DetailCallback){
+        this.detailCallback = callback
+    }
+
     class ViewHolder(val binding : ItemEntityBinding)
         : RecyclerView.ViewHolder(binding.root)
 
@@ -34,9 +40,15 @@ class MainRecyclerViewAdapter(
         holder.binding.apply {
             tvInformationGain.text = item.toString()
             TvCondition.text = name
+            TvCondition.setOnClickListener {
+                detailCallback.detailCallBack(name)
+            }
         }
     }
 
-
     override fun getItemCount(): Int = dataList.size
+
+    interface DetailCallback{
+        fun detailCallBack(data : String)
+    }
 }
