@@ -7,7 +7,7 @@ package nn.components.matrix
     set Row
  */
 class Matrix(
-    private val m : Int,
+    val m : Int,
     val n : Int,
     private var name : String = "matrix"
 ) {
