@@ -19,5 +19,5 @@ if __name__ == '__main__':
 
     list_students = student_marks.get(query_name,[])
     average = sum(list_students) / len(list_students)
-
+()
     print("{:.2f}".format(average))
