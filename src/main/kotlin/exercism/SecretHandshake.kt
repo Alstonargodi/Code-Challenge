@@ -16,7 +16,7 @@ object HandshakeCalculator {
         val result = mutableListOf<Signal>()
 
         //coerce at least Ensures that this value is not less than the specified minimumValue
-        present.subList(0,5.coerceAtLeast(present.size)).forEachIndexed { index, present ->
+        present.subList(0,5.coerceAtMost(present.size)).forEachIndexed { index, present ->
             if(present){
                 when(index){
                     0 -> result.add(Signal.WINK)
