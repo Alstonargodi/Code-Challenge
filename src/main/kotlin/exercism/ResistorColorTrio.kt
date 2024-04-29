@@ -17,6 +17,7 @@ object ResistorColorTrio {
                 ohm /= 10
                 zeroes++
             }
+
             else
                 break
         }
