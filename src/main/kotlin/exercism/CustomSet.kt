@@ -9,7 +9,7 @@ class CustomSet(vararg elements: Int) {
     private val data: MutableSet<Int> = if (elements.isEmpty()){
         HashSet<Int>()
     } else{
-        elements.toMutablesSet()
+        elements.toMutableSet()
     }
 
     fun isEmpty(): Boolean = data.isEmpty()
