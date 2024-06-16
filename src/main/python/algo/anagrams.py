@@ -11,7 +11,6 @@ import array
 
 
 def Anagrams(word1,word2):
-
     # sort word per character
     if(sorted(word1) == sorted(word2)):
         print("yes")
