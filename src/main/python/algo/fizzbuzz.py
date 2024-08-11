@@ -13,3 +13,4 @@ def fizzBuzz(n):
 
 for i in range(100):
         fizzBuzz(i)
+
