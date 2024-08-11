@@ -1,4 +1,4 @@
-package exercism
+package exercism.easy
 
 object RunLengthEncoding {
     fun encode(input: String): String =

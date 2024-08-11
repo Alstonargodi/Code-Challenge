@@ -1,4 +1,4 @@
-package exercism
+package exercism.easy
 
 object Transpose {
     fun transpose(input: List<String>): List<String> {

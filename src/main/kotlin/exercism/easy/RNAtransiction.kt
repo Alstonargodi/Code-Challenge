@@ -1,4 +1,4 @@
-package exercism
+package exercism.easy
 
 fun transcribeToRna(dna: String): String {
     var transcribedRNA : String = ""

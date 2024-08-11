@@ -1,4 +1,4 @@
-package exercism
+package exercism.easy
 
 data class Year(val year: Int) {
 

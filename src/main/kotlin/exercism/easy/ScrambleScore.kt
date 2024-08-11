@@ -1,4 +1,4 @@
-package exercism
+package exercism.easy
 
 //when approach 2 sec
 object ScrambleScore {

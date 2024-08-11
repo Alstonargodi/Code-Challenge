@@ -1,4 +1,4 @@
-package exercism
+package exercism.easy
 
 object BinarySearch {
     fun search(list: List<Int>, item: Int): Int {

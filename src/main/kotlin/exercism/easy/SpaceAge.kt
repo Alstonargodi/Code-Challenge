@@ -1,4 +1,4 @@
-package exercism
+package exercism.easy
 
 import java.math.BigDecimal
 import java.math.RoundingMode

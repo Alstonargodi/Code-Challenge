@@ -1,4 +1,4 @@
-package exercism
+package exercism.easy
 
 import sun.misc.Signal
 

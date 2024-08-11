@@ -1,4 +1,4 @@
-package exercism
+package exercism.easy
 
 object Pangram {
     fun isPangram(input: String): Boolean {

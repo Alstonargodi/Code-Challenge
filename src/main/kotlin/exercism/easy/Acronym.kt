@@ -1,4 +1,4 @@
-package exercism
+package exercism.easy
 
 class Acronym {
     fun generate(phrase: String) : String {

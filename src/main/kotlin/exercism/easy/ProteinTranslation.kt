@@ -1,4 +1,4 @@
-package exercism
+package exercism.easy
 
 fun translate(rna: String?): List<String>{
     if(rna == null) return emptyList()

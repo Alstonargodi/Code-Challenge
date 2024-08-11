@@ -1,4 +1,4 @@
-package exercism
+package exercism.easy
 
 object ResistorColor {
     fun colorCode(input: String): Int {

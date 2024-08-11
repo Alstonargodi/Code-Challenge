@@ -1,3 +1,5 @@
+package exercism.easy
+
 import java.awt.Color
 
 object ResistorColorDuo {

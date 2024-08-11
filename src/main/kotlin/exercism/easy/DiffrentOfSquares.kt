@@ -1,4 +1,4 @@
-package exercism
+package exercism.easy
 
 private fun Int.squared() = this * this
 

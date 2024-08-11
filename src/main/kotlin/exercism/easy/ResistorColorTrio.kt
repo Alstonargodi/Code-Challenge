@@ -1,4 +1,4 @@
-//package exercism
+package exercism.easy//package exercism
 //
 //import java.awt.Color
 //
