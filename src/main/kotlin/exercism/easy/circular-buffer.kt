@@ -2,27 +2,49 @@ package exercism.easy
 
 import kotlin.collections.ArrayDeque
 
-class EmptyBufferException
+class EmptyBufferException : Exception()
 
-class BufferFullException
+class BufferFullException : Exception()
 
-class CircularBuffer<T> {
+class CircularBuffer<T>(size: Int) {
     // TODO: implement proper constructor to complete the task
+    private var list: MutableList<T?> = MutableList(size){ null }
+    private var currentIndex = 0
+    private fun nextIndex(): Int = (currentIndex + 1) % list.size
+    private fun incrementIndex(){
+        this.currentIndex = this.nextIndex()
+    }
+
+    private var currentValue : T?
+        get() = this.list[this.currentIndex]
+        set(value){ this.list[this.currentIndex] = value }
 
     fun read() : T {
-        TODO("Implement this function to complete the task")
+        val value = this.currentValue ?: throw EmptyBufferException()
+        this.currentValue = null
+        this.incrementIndex()
+        return value
     }
 
-    fun write(value: T) {
-        TODO("Implement this function to complete the task")
-
+    tailrec fun write(value: T, offset: Int = 0) {
+        val indexAtOffset = (this.currentIndex + offset) % list.size
+        if (this.list[indexAtOffset] == null){
+            this.list[indexAtOffset] = value
+        } else if (offset >= list.size){
+            throw BufferFullException()
+        }else{
+            this.write(value,offset+1)
+        }
     }
 
-    fun overwrite(value: T) {
-        TODO("Implement this function to complete the task")
+    fun overwrite(value: T) = if (this.list.contains(null)){
+        this.write(value)
+    } else  {
+        this.currentValue = value
+        this.incrementIndex()
     }
 
     fun clear() {
-        TODO("Implement this function to complete the task")
+        this.list = MutableList(this.list.size) { null}
     }
 }
