@@ -7,7 +7,7 @@ class EmptyBufferException : Exception()
 class BufferFullException : Exception()
 
 class CircularBuffer<T>(size: Int) {
-    // TODO: implement proper constructor to complete the task
+    // list buffer
     private var list: MutableList<T?> = MutableList(size){ null }
     private var currentIndex = 0
     private fun nextIndex(): Int = (currentIndex + 1) % list.size
